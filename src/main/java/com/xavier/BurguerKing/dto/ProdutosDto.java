@@ -1,6 +1,5 @@
 package com.xavier.BurguerKing.dto;
 
-import com.xavier.BurguerKing.model.ProdutosModel;
 import com.xavier.BurguerKing.model.UserModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +10,11 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter@Setter
-public class PedidoDto {
+@Getter
+@Setter
+public class ProdutosDto {
     private Long id;
-    private Long cliente;
-    private List<Long> itens;
+    private String nomeProduto;
+    private int quantidadeProdutos;
+    private List<UserModel> user;
 }

@@ -1,28 +1,33 @@
 package com.xavier.BurguerKing.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Table(name = "tb_pedido")
+@Table(name = "tb_pedidos")
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter@Setter
+@Getter
+@Setter
 public class PedidoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nomePedido;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserModel cliente;
 
-    private int quantidade;
-
-    @OneToMany
-    @JsonIgnore
-    private List<UserModel> user;
+    @ManyToMany
+    @JoinTable(name = "tb_pedido_produtos",
+            joinColumns = @JoinColumn(name = "pedido_id"),
+            inverseJoinColumns = @JoinColumn(name = "produto_id"))
+    private List<ProdutosModel> itens;
+    
 }

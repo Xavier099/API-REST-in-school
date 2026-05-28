@@ -56,8 +56,7 @@ public class UserService {
         user.setName(userDto.getName());
         user.setPhone(userDto.getPhone());
         user.setEmail(userDto.getEmail());
-        user.setPedido(userDto.getPedido());
-        UserModel userSalvo = userRepository.save(user);
-        return userMapper.map(user);
+        user.setProdutos(userDto.getPedido());
+        return userMapper.map(userRepository.save(user));
     }
 }

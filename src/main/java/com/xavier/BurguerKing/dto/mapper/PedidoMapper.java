@@ -2,26 +2,32 @@ package com.xavier.BurguerKing.dto.mapper;
 
 import com.xavier.BurguerKing.dto.PedidoDto;
 import com.xavier.BurguerKing.model.PedidoModel;
+import com.xavier.BurguerKing.model.ProdutosModel;
+import com.xavier.BurguerKing.model.UserModel;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class PedidoMapper {
 
-    public PedidoDto map(PedidoModel pedidoModel){
-        PedidoDto pedidoDto = new PedidoDto();
-        pedidoDto.setId(pedidoModel.getId());
-        pedidoDto.setNomePedido(pedidoModel.getNomePedido());
-        pedidoDto.setQuantidade(pedidoModel.getQuantidade());
-        pedidoDto.setUser(pedidoModel.getUser());
-        return pedidoDto;
+    public PedidoDto toDto(PedidoModel pedido){
+        PedidoDto dto = new PedidoDto();
+        dto.setId(pedido.getId());
+        dto.setCliente(pedido.getCliente().getId());
+        dto.setItens(
+                pedido.getItens().stream()
+                        .map(ProdutosModel::getId)
+                        .toList()
+        );
+        return dto;
     }
 
-    public PedidoModel map(PedidoDto pedidoDto){
-        PedidoModel pedidoModel = new PedidoModel();
-        pedidoModel.setId(pedidoDto.getId());
-        pedidoModel.setNomePedido(pedidoDto.getNomePedido());
-        pedidoModel.setQuantidade(pedidoDto.getQuantidade());
-        pedidoModel.setUser(pedidoDto.getUser());
-        return pedidoModel;
+    public PedidoModel map(PedidoDto pedidoDto, UserModel cliente, List<ProdutosModel> produtosModels){
+        PedidoModel pedido = new PedidoModel();
+        pedido.setId(pedidoDto.getId());
+        pedido.setCliente(cliente);
+        pedido.setItens(produtosModels);
+        return pedido;
     }
 }

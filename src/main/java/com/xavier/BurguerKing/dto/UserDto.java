@@ -1,6 +1,6 @@
 package com.xavier.BurguerKing.dto;
 
-import com.xavier.BurguerKing.model.PedidoModel;
+import com.xavier.BurguerKing.model.ProdutosModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,5 +14,5 @@ public class UserDto {
     private String name;
     private String phone;
     private String email;
-    private PedidoModel pedido;
+    private ProdutosModel pedido;
 }

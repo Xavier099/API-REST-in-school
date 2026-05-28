@@ -2,10 +2,7 @@ package com.xavier.BurguerKing.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "tb_user")
@@ -18,6 +15,10 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true )
+    @NonNull
+    private String login;
+
     private String name;
 
     private String phone;
@@ -26,7 +27,7 @@ public class UserModel {
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "pedidos_id")
-    private PedidoModel pedido;
+    @JoinColumn(name = "produtos_id")
+    private ProdutosModel produtos;
 
 }
